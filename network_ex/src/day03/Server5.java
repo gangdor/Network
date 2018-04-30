@@ -7,12 +7,14 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URL;
 import java.util.Scanner;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class Server5 {
 
 	boolean flag = true;
-
 	ServerSocket serverSocket;
 
 	public Server5() {
@@ -105,6 +107,8 @@ public class Server5 {
 					if (str.trim().equals("qq")) {
 						break;
 					}
+					SendHttp sendhttp = new SendHttp(str);
+					sendhttp.start();
 				} catch (Exception e) {
 					System.out.println("Server Closed");
 					break;
@@ -119,7 +123,30 @@ public class Server5 {
 			}
 		}
 	}
-
+	
+	class SendHttp extends Thread{
+		String msg;
+		String urls = "http://127.0.0.1:8000/webserver/main.do";
+		public SendHttp(String msg) {
+			this.msg = msg;
+		}
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			urls=urls+"?speed="+msg;
+			try {
+				URL url = new URL(urls);
+				HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+				conn.setRequestMethod("POST");
+				conn.setConnectTimeout(5000);
+				conn.getInputStream();
+				System.out.println(url);
+			}catch(Exception e) {
+				
+			}
+		}
+	}
+	
 	public static void main(String args[]) {
 		try {
 			new Server5().startServer();
@@ -127,5 +154,4 @@ public class Server5 {
 			e.printStackTrace();
 		}
 	}
-
 }

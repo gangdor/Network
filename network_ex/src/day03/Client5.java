@@ -12,13 +12,31 @@ import java.util.Scanner;
 public class Client5 {
 
 	boolean flag = true;
-	String address = "70.12.114.144";
+	String address = "70.12.114.149";
 	Socket socket;
 	Scanner scanner;
+	boolean cflag = true;
 
-	public Client5() throws UnknownHostException, IOException {
-		socket = new Socket(address, 7777);
-		System.out.println("Connected Server ..");
+	public Client5(){
+		while(cflag) {
+			try {
+				socket = new Socket(address, 9999);
+				System.out.println("Connected Server ..");
+				cflag= false;
+				break;
+			} catch (UnknownHostException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				System.out.println("Connected Retry ..");
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
+			}
+		}
+		
+		
 	}
 
 	public void startClient() throws Exception {
@@ -28,7 +46,7 @@ public class Client5 {
 		scanner = new Scanner(System.in);
 		while (flag != false) {
 
-			System.out.println("Ŭ���̾�Ʈ �Է� �ϼ���:");
+			System.out.println("Hey, Client Talk to me :");
 
 			String str = scanner.nextLine();
 			if (str.trim().equals("q")) {
@@ -126,5 +144,4 @@ public class Client5 {
 			e.printStackTrace();
 		}
 	}
-
 }
