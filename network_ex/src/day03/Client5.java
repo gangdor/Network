@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Client5 {
 
 	boolean flag = true;
-	String address = "70.12.114.149";
+	String address = "192.168.0.7";
 	Socket socket;
 	Scanner scanner;
 	boolean cflag = true;
@@ -20,7 +20,7 @@ public class Client5 {
 	public Client5(){
 		while(cflag) {
 			try {
-				socket = new Socket(address, 9999);
+				socket = new Socket(address, 7777);
 				System.out.println("Connected Server ..");
 				cflag= false;
 				break;
@@ -35,8 +35,6 @@ public class Client5 {
 				}
 			}
 		}
-		
-		
 	}
 
 	public void startClient() throws Exception {

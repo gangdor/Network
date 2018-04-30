@@ -114,7 +114,5 @@ public class Server6 {
 	            e.printStackTrace();
 	         }         
 	      }
-	      
 	   }
-
 	}
