@@ -49,7 +49,6 @@ public class Server extends Thread{
 			server = new Server();
 			server.start();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
