@@ -9,20 +9,15 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
-public class Client {
-	
-//1. 소켓을 만드는 역할
-//2. Receiver
-//3. Sender
-	
+public class Client2 {
+		
 	boolean flag = true;
-	String address = "70.12.114.150";
+	String address = "70.12.114.149";
 	Socket socket;
 	Scanner scanner;
 	boolean cflag = true;
 
-	public Client(){
-		//재접속을 위한 while
+	public Client2(){
 		while(cflag) {
 			try {
 				socket = new Socket(address, 8888);
@@ -91,7 +86,6 @@ public class Client {
 		public void run() {
 			try {
 				if (outw != null) {
-					//계속 보내는 역할을 한다.
 					outw.writeUTF(sendMsg);
 				}
 
@@ -108,7 +102,6 @@ public class Client {
 		DataInputStream inr;
 
 		public Receiver(Socket socket) throws IOException {
-			//Input의 역할을 한다.
 			this.socket = socket;
 			in = socket.getInputStream();
 			inr = new DataInputStream(in);
@@ -116,7 +109,6 @@ public class Client {
 
 		@Override
 		public void run() {
-			//계속 스레드가 실행하며 문자열을 받는다.
 			while (inr != null) {
 				try {
 
@@ -146,7 +138,7 @@ public class Client {
 
 	public static void main(String args[]) {
 		try {
-			new Client().startClient();
+			new Client2().startClient();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
